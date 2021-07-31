@@ -11,8 +11,8 @@ import java.util.Objects;
  */
 public class StaticSetOfInts<Element extends Comparable<Element>> {
 
-    private Element[] elements;
-    private int ELEMENT_NOT_FOUNT = -1;
+    private final Element[] elements;
+    private final int ELEMENT_NOT_FOUNT = -1;
 
     // Initialization method start
     public StaticSetOfInts(Element[] elements) {
