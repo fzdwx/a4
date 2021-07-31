@@ -1,6 +1,7 @@
 package org.atomic.infrastructure;
 
 import stdlib.StdDraw;
+
 /**
  * Description: 可视化的数据累加器 <br>
  *
@@ -10,6 +11,12 @@ import stdlib.StdDraw;
  */
 public class VisualAccumulator extends Accumulator {
 
+    /**
+     * 创建可视化的数据累加器
+     *
+     * @param trials x
+     * @param max    y
+     */
     public VisualAccumulator(int trials, double max) {
         StdDraw.setXscale(0, trials);
         StdDraw.setYscale(0, max);

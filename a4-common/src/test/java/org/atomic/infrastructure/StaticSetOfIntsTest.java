@@ -1,28 +1,26 @@
-package chapter_one.bs;
+package org.atomic.infrastructure;
 
-import chapter_one.BinarySearch;
 import cn.hutool.core.io.FileUtil;
 import org.junit.jupiter.api.Test;
 import stdlib.In;
 import stdlib.StdOut;
 
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author <a href="mailto:likelovec@gmail.com">like</a>
- * @date 2021/7/31 14:03
+ * @date 2021/7/31 17:14
  */
-class BinarySearchTest {
+class StaticSetOfIntsTest {
 
     @Test
-    void rank() {
+    void f1() {
         final int[] whitelist = new In(FileUtil.file("..\\..\\..\\data\\tinyAllowlist.txt")).readAllInts();
         final int[] needTestList = new In(FileUtil.file("..\\..\\..\\data\\tinyText.txt")).readAllInts();
 
-        Arrays.sort(whitelist);
-
+        final StaticSetOfInts<Integer> set = StaticSetOfInts.of(whitelist);
         for (int key : needTestList) {
-            if (BinarySearch.rank(key, whitelist) < 0) {
+            if (!set.has(key)) {
                 StdOut.println("不在白名单中:" + key);
             }
         }
