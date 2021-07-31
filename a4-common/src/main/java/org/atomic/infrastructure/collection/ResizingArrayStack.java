@@ -10,16 +10,21 @@ import java.util.Iterator;
  *
  * @author <a href="mailto:likelovec@gmail.com">like</a>
  * @date 2021-07-31 18:46:23
- * @see FixedCapacityStack
  */
-public class ResizingArrayStack<Item> extends FixedCapacityStack<Item> implements Iterable<Item> {
+public class ResizingArrayStack<Item> implements Stack<Item> {
 
+    private static final int default_capacity = 10;
     protected int n;
     protected Item[] a;
 
     // Initialization method start
+    public ResizingArrayStack() {
+        this(default_capacity);
+    }
+
     public ResizingArrayStack(int capacity) {
-        super(capacity);
+        this.n = capacity;
+        this.a = ( Item[] ) new Object[n];
     }
 
     public ResizingArrayStack<Item> of(int capacity) {
@@ -30,15 +35,20 @@ public class ResizingArrayStack<Item> extends FixedCapacityStack<Item> implement
     @Override
     public void push(Item item) {
         if (n == a.length) resize(a.length * 2);
-        super.push(item);
+        a[n++] = item;
     }
 
     @Override
     public Item pop() {
-        final Item item = super.pop();
+        final Item item = a[--n];
         a[n] = null; // 移除在数组中的item，避免对象游离。
         if (n > 0 && n == a.length / 4) resize(a.length / 2);
         return item;
+    }
+
+    @Override
+    public int size() {
+        return n;
     }
 
     @Override
