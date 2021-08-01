@@ -17,10 +17,10 @@ class LinkedListTest {
         list.add("6");
         list.add("13");
         list.add("15");
+        list.add("4");
         System.out.println(list);
 
-
-        list.clear();
+        list.remove("4");
         System.out.println(list);
     }
 

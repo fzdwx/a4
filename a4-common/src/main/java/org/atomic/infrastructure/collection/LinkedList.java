@@ -2,6 +2,7 @@ package org.atomic.infrastructure.collection;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Description: 链表 <br>
@@ -37,8 +38,18 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
     /**
      * 删除链表中所有item和key相同的节点
      */
-    public static <Item> void remove(LinkedList<Item> list, Item key) {
-        // TODO: 2021/7/31  remove
+    public void remove(Item key) {
+        if (key == null) return;
+
+        ResizingArrayStack<Node> stack = new ResizingArrayStack<>();
+        traverse((node) -> {
+            if (key.equals(node.item)) stack.push(node);
+        });
+
+        Node pop;
+        while ((pop = stack.pop()) != null) {
+            unlinkNoReturn(pop);
+        }
     }
 
     /**
@@ -77,13 +88,17 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
      */
     @SuppressWarnings("all")
     public boolean delete(Item item) {
-        for (Node f = this.first; f != null; f = f.next) {
-            if (f.item.equals(item)) {
-                unlink(f);
-                return true;
+        AtomicBoolean flag = new AtomicBoolean(false);
+
+        traverse((node) -> {
+            if (node.item.equals(item)) {
+                unlink(node);
+                flag.set(true);
+                return;
             }
-        }
-        return false;
+        });
+
+        return flag.get();
     }
 
     /**
@@ -107,6 +122,25 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
     }
 
     /**
+     * 遍历
+     */
+    public void traverse(Visitor<Item> visitor) {
+        for (Node f = first; f != null; f = f.next) {
+            visitor.visit(f);
+        }
+    }
+
+    /**
+     * 接收一个链表节点作为参数并删除该节点的后续节点
+     */
+    private Item removeAfter(Node node) {
+        if (node == null || node.item == null || node.next == null) {
+            return null;
+        }
+        return unlink(node.next);
+    }
+
+    /**
      * 取消连接
      * <pre>
      *     prev node next => prev next
@@ -114,6 +148,11 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
      */
     private Item unlink(Node node) {
         final Item item = node.item;
+        unlinkNoReturn(node);
+        return item;
+    }
+
+    private void unlinkNoReturn(Node node) {
         final Node next = node.next;
         final Node prev = node.prev;
 
@@ -132,7 +171,25 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
         node.item = null;
 
         n--;
-        return item;
+    }
+
+    /**
+     * 接收两个链表节点作为参数，将第二节点插入链表并使之成为第一个节点的后续节点
+     * <pre>
+     *     before next => before after next
+     * </pre>
+     */
+    private void linkAfter(Node before, Item afterItem) {
+        final Node next = before.next;
+
+        final Node after = new Node(afterItem);
+        if (next == null) {
+            this.last = after;
+        } else {
+            after.next = next;
+            after.prev = before;
+        }
+        before.next = after;
     }
 
     /**
@@ -234,6 +291,12 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
         }
     }
 
+    @FunctionalInterface
+    interface Visitor<Item> {
+
+        void visit(LinkedList<Item>.Node node);
+    }
+
     /**
      * Description: 链表节点 <br>
      *
@@ -241,17 +304,18 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
      * @date 2021-07-31 21:28:17
      * @see Node
      */
-    private class Node extends Linked<Item>.AbstractNode {
+    public class Node extends Linked<Item>.AbstractNode {
         private Item item;
         /** this的下一个节点 */
         private Node next;
         /** this的上一个节点 */
         private Node prev;
 
-        private Node() {
+        private Node(Item item) {
+            this.item = item;
         }
 
-        public Node(Item item, Node prev, Node next) {
+        private Node(Item item, Node prev, Node next) {
             this.item = item;
             this.prev = prev;
             this.next = next;
