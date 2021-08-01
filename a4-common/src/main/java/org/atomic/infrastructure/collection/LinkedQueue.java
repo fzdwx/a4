@@ -51,4 +51,32 @@ public class LinkedQueue<Item> extends Linked<Item> implements Queue<Item> {
         n--;
         return item;
     }
+
+    private class Node extends Linked<Item>.AbstractNode {
+        private Item item;
+        /** this的下一个节点 */
+        private Node next;
+
+        private Node() {
+        }
+
+        public Node(Item item) {
+            this.item = item;
+        }
+
+        public Node(Item item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
+
+        @Override
+        protected Linked<Item>.AbstractNode next() {
+            return next;
+        }
+
+        @Override
+        protected Item item() {
+            return item;
+        }
+    }
 }
