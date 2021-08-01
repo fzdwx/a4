@@ -1,6 +1,7 @@
 package org.atomic.infrastructure.collection;
 
 import java.util.Iterator;
+import java.util.function.Function;
 
 /**
  * Description: 链 <br>
@@ -11,9 +12,7 @@ import java.util.Iterator;
  */
 public abstract class Linked<Item> implements Iterable<Item> {
 
-    @Override
-    public String toString() {
-        Iterator<Item> it = iterator();
+    protected Function<Iterator<Item>, String> print = (it) -> {
         if (!it.hasNext())
             return "[]";
 
@@ -26,47 +25,11 @@ public abstract class Linked<Item> implements Iterable<Item> {
                 return sb.append(']').toString();
             sb.append(',').append(' ');
         }
+    };
+
+    @Override
+    public String toString() {
+        return print.apply(iterator());
     }
 
-    /**
-     * Description: 链表 迭代器 <br>
-     *
-     * @author <a href="mailto:likelovec@gmail.com">like</a>
-     * @date 2021-07-31 19:58:52
-     * @see Iterator
-     */
-    protected class LinkedIterator implements Iterator<Item> {
-        private AbstractNode curr;
-
-        /**
-         * @param first 第一个节点
-         */
-        public LinkedIterator(AbstractNode first) {
-            this.curr = first;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return curr != null;
-        }
-
-        @Override
-        public Item next() {
-            final Item item = curr.item();
-            curr = curr.next();
-            return item;
-        }
-    }
-
-    /**
-     * Description: 链表 节点 <br>
-     *
-     * @author <a href="mailto:likelovec@gmail.com">like</a>
-     * @date 2021-07-31 19:35:52
-     */
-    protected abstract class AbstractNode {
-        protected abstract AbstractNode next();
-
-        protected abstract Item item();
-    }
 }

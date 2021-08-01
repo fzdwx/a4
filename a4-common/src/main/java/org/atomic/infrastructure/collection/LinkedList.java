@@ -36,6 +36,15 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
     // Initialization method end
 
     /**
+     * 以传入节点作为root节点，打印他以及他的next的信息。
+     */
+    public void print(Node node) {
+        final String nodeInfo = print.apply(new LinkedIterator<>(node));
+
+        System.out.println(nodeInfo);
+    }
+
+    /**
      * 删除链表中所有item和key相同的节点
      */
     public void remove(Item key) {
@@ -128,6 +137,59 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
         for (Node f = first; f != null; f = f.next) {
             visitor.visit(f);
         }
+    }
+
+    /**
+     * 反转当前链表
+     */
+    public Node reverse() {
+        return reverseUseIteration(this.first);
+    }
+
+    /**
+     * 翻转链表，以node节点作为第一个节点
+     * <pre>
+     *     迭代：记录链表中三个连续的节点：reverse、first、second
+     *       1. 在每轮迭代中，从原链表中提取first，并将它插入到逆链表的头节点
+     *       2. 需要一直保持first是指向原链表中所有剩余节点的首节点
+     *       3. second指向原链表中所有剩余节点的第二个节点，
+     *       4. reverse指向结果链表的头节点
+     * </pre>
+     */
+    public Node reverseUseIteration(Node x) {
+        if (x == null) return null;
+
+        Node first = x;
+        Node reverse = null;
+
+        while (first != null) {
+            final Node second = first.next;  // 迭代，temp
+
+            first.next = reverse;
+            reverse = first;
+
+            first = second;
+        }
+        return reverse;
+    }
+
+    /**
+     * 翻转链表:使用递归
+     * <pre>
+     *     假设链表有N个节点，先递归颠倒最后第N-1节点，然后将原链表中的首节点插入到结果链表的尾部
+     * </pre>
+     */
+    public Node reverseUseRecursion(Node x) {
+        if (x == null) return null;
+        if (x.next == null) return x;
+
+        final Node second = first.next;
+        final Node rest = reverseUseRecursion(second);
+
+        second.next = first;
+        first.next = null;
+
+        return rest;
     }
 
     /**
@@ -304,7 +366,7 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
      * @date 2021-07-31 21:28:17
      * @see Node
      */
-    public class Node extends Linked<Item>.AbstractNode {
+    public class Node extends AbstractNode<Item> {
         private Item item;
         /** this的下一个节点 */
         private Node next;
@@ -322,7 +384,7 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
         }
 
         @Override
-        protected Linked<Item>.AbstractNode next() {
+        protected AbstractNode<Item> next() {
             return next;
         }
 

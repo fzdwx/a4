@@ -22,6 +22,8 @@ class LinkedListTest {
 
         list.remove("4");
         System.out.println(list);
+
+        list.print(list.reverse());
     }
 
 }

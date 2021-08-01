@@ -28,7 +28,7 @@ public class LinkedQueue<Item> extends Linked<Item> implements Queue<Item> {
 
     @Override
     public Iterator<Item> iterator() {
-        return new LinkedIterator(head);
+        return new LinkedIterator<>(head);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class LinkedQueue<Item> extends Linked<Item> implements Queue<Item> {
         return item;
     }
 
-    private class Node extends Linked<Item>.AbstractNode {
+    private class Node extends AbstractNode<Item> {
         private Item item;
         /** this的下一个节点 */
         private Node next;
@@ -70,7 +70,7 @@ public class LinkedQueue<Item> extends Linked<Item> implements Queue<Item> {
         }
 
         @Override
-        protected Linked<Item>.AbstractNode next() {
+        protected AbstractNode<Item> next() {
             return next;
         }
 
