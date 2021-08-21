@@ -23,11 +23,21 @@ public class Accumulator {
     /**
      * 添加一个新的数据值
      *
-     * @param val 瓦尔
+     * @param val
+     *         瓦尔
      */
     public void addDataValue(double val) {
         total += val;
         N++;
+    }
+
+    /**
+     * 得到的数据值
+     *
+     * @return double
+     */
+    public double getDataValue() {
+        return total;
     }
 
     /**

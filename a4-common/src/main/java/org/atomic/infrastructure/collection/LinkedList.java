@@ -139,12 +139,6 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
         }
     }
 
-    /**
-     * 反转当前链表
-     */
-    public Node reverse() {
-        return reverseUseIteration(this.first);
-    }
 
     /**
      * 翻转链表，以node节点作为第一个节点
@@ -190,6 +184,13 @@ public class LinkedList<Item> extends Linked<Item> implements Collection<Item> {
         first.next = null;
 
         return rest;
+    }
+
+    /**
+     * 反转当前链表
+     */
+    public Node reverse() {
+        return reverseUseIteration(this.first);
     }
 
     /**

@@ -14,13 +14,19 @@ public class VisualAccumulator extends Accumulator {
     /**
      * 创建可视化的数据累加器
      *
-     * @param trials x
-     * @param max    y
+     * @param trials
+     *         x
+     * @param max
+     *         y
      */
     public VisualAccumulator(int trials, double max) {
         StdDraw.setXscale(0, trials);
         StdDraw.setYscale(0, max);
         StdDraw.setPenRadius(.005);
+    }
+
+    public static Accumulator of() {
+        return new VisualAccumulator(2000, 1.0);
     }
 
     @Override
