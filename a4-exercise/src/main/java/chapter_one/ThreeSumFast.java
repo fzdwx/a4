@@ -38,13 +38,13 @@ public class ThreeSumFast {
 
         final List<String> urls = ListUtil.of(
                 "https://algs4.cs.princeton.edu/14analysis/1Kints.txt"
-                // ,
-                // "https://algs4.cs.princeton.edu/14analysis/2Kints.txt",
-                // "https://algs4.cs.princeton.edu/14analysis/4Kints.txt",
-                // "https://algs4.cs.princeton.edu/14analysis/8Kints.txt",
-                // "https://algs4.cs.princeton.edu/14analysis/16Kints.txt",
-                // "https://algs4.cs.princeton.edu/14analysis/32Kints.txt",
-                // "https://algs4.cs.princeton.edu/14analysis/1Mints.txt"
+                ,
+                "https://algs4.cs.princeton.edu/14analysis/2Kints.txt",
+                "https://algs4.cs.princeton.edu/14analysis/4Kints.txt",
+                "https://algs4.cs.princeton.edu/14analysis/8Kints.txt",
+                "https://algs4.cs.princeton.edu/14analysis/16Kints.txt",
+                "https://algs4.cs.princeton.edu/14analysis/32Kints.txt",
+                "https://algs4.cs.princeton.edu/14analysis/1Mints.txt"
         );
 
         urls.forEach((url) -> {

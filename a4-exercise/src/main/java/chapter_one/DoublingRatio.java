@@ -24,7 +24,7 @@ public class DoublingRatio {
 
     public static void main(String[] args) {
         double time;
-        double prev = timeTrial(125);
+        double prev = timeTrial(1000);
         for (int n = 250; true; n += n) {
             time = timeTrial(n);
             System.out.printf("%6d %7.1f ", n, time);
