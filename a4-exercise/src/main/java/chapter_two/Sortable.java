@@ -1,6 +1,8 @@
 package chapter_two;
 
 /**
+ * 排序公共接口定义
+ *
  * @author <a href="mailto:likelovec@gmail.com">like</a>
  * @date 2021/8/21 15:20
  */
@@ -31,5 +33,4 @@ public interface Sortable {
         }
         return true;
     }
-
 }
