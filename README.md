@@ -12,3 +12,5 @@ https://algs4.cs.princeton.edu
 ## 4.[两数之和](https://www.wolai.com/qyfmfDstQ4c3RH3ztoq9CH)
 
 ## 5.[union find](https://www.wolai.com/g8NKLPwqENNdGt5ZEiXnnr)
+
+## 6.[排序算法](https://www.wolai.com/ve5WzoyVNBTDb3DYrWSYsw)

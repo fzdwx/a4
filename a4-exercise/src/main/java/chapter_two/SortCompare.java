@@ -19,7 +19,8 @@ public class SortCompare {
 
     static List<Class<? extends Sortable>> sortClasses = ListUtil.of(
             Insertion.class
-            , Selection.class
+            , Selection.class,
+            Shell.class
     );
 
     public static void randomArray(int n, int t) {
