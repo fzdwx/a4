@@ -1,6 +1,8 @@
 package chapter_one.uf;
 
 /**
+ * 实现了加权的 quick union
+ *
  * @author <a href="mailto:likelovec@gmail.com">like</a>
  * @date 2021/8/21 14:44
  */
