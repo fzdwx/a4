@@ -22,7 +22,8 @@ public class SortCompare {
 
     static List<Class<? extends Sortable>> sortClasses = ListUtil.of(
             Insertion.class
-            , Selection.class,
+            , Selection.class
+            , Merge.class,
             Shell.class
     );
     static CountDownLatch cdl;

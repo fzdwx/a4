@@ -19,8 +19,18 @@ public class Sort_Test {
         demo(Insertion.class);
     }
 
+    @Test
+    public void test_merge_in_place() {
+        demo(Merge.class);
+    }
+
+    @Test
+    public void test_merge_in_place_bu() {
+        demo(MergeBU.class);
+    }
+
     public void demo(Class<? extends Sortable> clazz) {
-        Integer[] a = new Integer[]{4, 2, 6, 4, 7};
+        Integer[] a = new Integer[]{4, 2, 6, 1, 7, 13, 8, 9, 11, 10, 18, 376, 222, 6666, 12356, 1231785};
 
 
         final Sortable sortable = ReflectUtil.newInstance(clazz);
