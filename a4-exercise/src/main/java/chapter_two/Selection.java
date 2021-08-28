@@ -26,9 +26,9 @@ public class Selection implements Sortable {
             // 将a[i] 和 a[i+1...n]中最小的数交换
             int min = i; // 最小元素的索引
             for (int j = i + 1; j < n; j++) {
-                if (less(a[j], a[min])) min = j; // 如果当前遍历的数比我们记录的数还小，就交换索引
+                if (Sortable.less(a[j], a[min])) min = j; // 如果当前遍历的数比我们记录的数还小，就交换索引
             }
-            exchange(a, i, min); // 交换
+            Sortable.exchange(a, i, min); // 交换
         }
     }
 }

@@ -1,15 +1,12 @@
 package chapter_two;
 
 import cn.hutool.core.collection.ListUtil;
-import cn.hutool.core.date.StopWatch;
 import cn.hutool.core.util.ReflectUtil;
 import lombok.SneakyThrows;
+import org.atomic.infrastructure.StopWatch;
 import stdlib.StdRandom;
 
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * 各种排序算法的比较
@@ -21,13 +18,8 @@ import java.util.concurrent.Executors;
 public class SortCompare {
 
     static List<Class<? extends Sortable>> sortClasses = ListUtil.of(
-            Insertion.class
-            , Selection.class
-            , Merge.class,
-            Shell.class
+            MergeBU.class, Merge.class, Quick.class, QuickV2.class, Quick3way.class
     );
-    static CountDownLatch cdl;
-    static ExecutorService pool;
 
     public static void randomArray(int n, int t) {
         Double[] a = new Double[n];
@@ -41,29 +33,21 @@ public class SortCompare {
 
     @SneakyThrows
     public static void main(String[] args) {
-        final int n = 10000;
+        final int n = 1000000;
         final int t = 5;
-        cdl = new CountDownLatch(t);
-        pool = Executors.newFixedThreadPool(t);
         randomArray(n, t);
 
-        cdl.await();
-
-        pool.shutdown();
     }
 
     @SneakyThrows
     private static void time(List<Class<? extends Sortable>> clazzList, Double[] a, int count) {
         final StopWatch watch = StopWatch.create("sort - " + count);
-        pool.submit(() -> {
-            clazzList.forEach((clazz) -> {
-                watch.start(clazz.getSimpleName());
-                final Sortable sortable = ReflectUtil.newInstance(clazz);
-                sortable.sort(a);
-                watch.stop();
-            });
-            System.out.println(watch.prettyPrint());
-            cdl.countDown();
+        clazzList.forEach((clazz) -> {
+            watch.start(clazz.getSimpleName());
+            final Sortable sortable = ReflectUtil.newInstance(clazz);
+            sortable.sort(a);
+            watch.stop();
         });
+        System.out.println(watch.prettyPrint());
     }
 }

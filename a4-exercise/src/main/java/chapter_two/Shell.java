@@ -34,8 +34,8 @@ public class Shell extends Insertion {
         while (h >= 1) {
             // step = h,每隔h步长进行插入排序
             for (int i = h; i < n; i++) {
-                for (int j = i; j >= h && less(a[j], a[j - h]); j -= h) {
-                    exchange(a, j, j - h);
+                for (int j = i; j >= h && Sortable.less(a[j], a[j - h]); j -= h) {
+                    Sortable.exchange(a, j, j - h);
                 }
             }
             h = h / 3;

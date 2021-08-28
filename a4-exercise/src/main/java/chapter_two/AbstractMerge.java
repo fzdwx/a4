@@ -22,7 +22,7 @@ public abstract class AbstractMerge implements RecursionDebugAble, Sortable {
                 a[i] = aux[r++];
             else if (r > hi) // 右边取完，取左边
                 a[i] = aux[l++];
-            else if (less(aux[r], aux[l])) // 右边小于左边，取右边
+            else if (Sortable.less(aux[r], aux[l])) // 右边小于左边，取右边
                 a[i] = aux[r++];
             else // 右边大于等于左边，取左边
                 a[i] = aux[l++];

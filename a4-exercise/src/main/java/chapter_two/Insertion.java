@@ -18,6 +18,10 @@ package chapter_two;
  */
 public class Insertion implements Sortable {
 
+    public static void Sort(Comparable[] a) {
+        new Insertion().sort(a);
+    }
+
     @Override
     public void sort(Comparable[] a) {
         final int n = a.length;
@@ -25,8 +29,8 @@ public class Insertion implements Sortable {
         // 假设i的左边都是排好序的
         for (int i = 1; i < n; i++) {
             // 将a[i]插入到 a[i-1]、a[i-2]、a[i-3]...中
-            for (int j = i; j > 0 && less(a[j], a[j - 1]); j--) {
-                exchange(a, j, j - 1);
+            for (int j = i; j > 0 && Sortable.less(a[j], a[j - 1]); j--) {
+                Sortable.exchange(a, j, j - 1);
             }
         }
     }

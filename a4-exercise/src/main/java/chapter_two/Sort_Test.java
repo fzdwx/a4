@@ -29,14 +29,29 @@ public class Sort_Test {
         demo(MergeBU.class);
     }
 
+    @Test
+    public void test_quick() {
+        demo(Quick.class);
+    }
+
+    @Test
+    public void test_quick_v2() {
+        demo(QuickV2.class);
+    }
+
+    @Test
+    public void test_quick_3way() {
+        demo(Quick3way.class);
+    }
+
     public void demo(Class<? extends Sortable> clazz) {
-        Integer[] a = new Integer[]{4, 2, 6, 1, 7, 13, 8, 9, 11, 10, 18, 376, 222, 6666, 12356, 1231785};
+        Integer[] a = new Integer[]{4, 2, 6, 1, 7, 13, 8, 9, 11, 10, 222, 376, 17, 6666, 1231785, 12356};
 
 
         final Sortable sortable = ReflectUtil.newInstance(clazz);
 
         sortable.sort(a);
 
-        sortable.show(a);
+        Sortable.show(a);
     }
 }
