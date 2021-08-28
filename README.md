@@ -13,3 +13,5 @@ https://algs4.cs.princeton.edu
 5.[union find](https://www.wolai.com/g8NKLPwqENNdGt5ZEiXnnr)
 
 6.[排序算法](https://www.wolai.com/ve5WzoyVNBTDb3DYrWSYsw)
+
+7.[优先级队列](https://www.wolai.com/tXLveEZGbpiFsagiVKAsb9)
