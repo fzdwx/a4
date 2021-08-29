@@ -1,4 +1,4 @@
-package chapter_two;
+package chapter_two.sort;
 
 /**
  * 快速排序的3向切分

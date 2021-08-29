@@ -1,4 +1,4 @@
-package chapter_two;
+package chapter_two.sort;
 
 /**
  * 自底向上的归并排序

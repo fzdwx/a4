@@ -1,4 +1,4 @@
-package chapter_two;
+package chapter_two.sort;
 
 /**
  * 使用快速排序优化

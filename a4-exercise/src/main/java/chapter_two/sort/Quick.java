@@ -1,4 +1,4 @@
-package chapter_two;
+package chapter_two.sort;
 
 import stdlib.StdRandom;
 
@@ -8,7 +8,7 @@ import stdlib.StdRandom;
  * @author <a href="mailto:likelovec@gmail.com">like</a>
  * @module
  * @date 2021-08-28 16:51:15
- * @see Sortable
+ * @see chapter_two.sort.Sortable
  */
 public class Quick implements Sortable {
 

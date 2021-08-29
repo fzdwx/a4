@@ -1,4 +1,4 @@
-package chapter_two;
+package chapter_two.sort;
 
 /**
  * <h2>选择排序</h2>
@@ -14,7 +14,7 @@ package chapter_two;
  *
  * @author <a href="mailto:likelovec@gmail.com">like</a>
  * @date 2021-08-21 16:26:17
- * @see Sortable
+ * @see chapter_two.sort.Sortable
  */
 public class Selection implements Sortable {
 

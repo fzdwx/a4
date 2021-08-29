@@ -1,5 +1,11 @@
 package chapter_two;
 
+import chapter_two.sort.Merge;
+import chapter_two.sort.MergeBU;
+import chapter_two.sort.Quick;
+import chapter_two.sort.Quick3way;
+import chapter_two.sort.QuickV2;
+import chapter_two.sort.Sortable;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.ReflectUtil;
 import lombok.SneakyThrows;

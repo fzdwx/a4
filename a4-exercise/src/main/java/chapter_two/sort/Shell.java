@@ -1,4 +1,4 @@
-package chapter_two;
+package chapter_two.sort;
 
 /**
  * <h2>希尔排序·</h2>
@@ -21,7 +21,7 @@ package chapter_two;
  * @author <a href="mailto:likelovec@gmail.com">like</a>
  * @module
  * @date 2021-08-22 10:24:42
- * @see Sortable
+ * @see chapter_two.sort.Sortable
  */
 public class Shell extends Insertion {
 
