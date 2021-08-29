@@ -1,5 +1,6 @@
 package chapter_two;
 
+import chapter_two.sort.Heap;
 import chapter_two.sort.Insertion;
 import chapter_two.sort.Merge;
 import chapter_two.sort.MergeBU;
@@ -50,6 +51,11 @@ public class Sort_Test {
     @Test
     public void test_quick_3way() {
         demo(Quick3way.class);
+    }
+
+    @Test
+    public void test_heap() {
+        demo(Heap.class);
     }
 
     public void demo(Class<? extends Sortable> clazz) {
