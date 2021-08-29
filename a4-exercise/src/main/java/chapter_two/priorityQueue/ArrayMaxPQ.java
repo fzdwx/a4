@@ -1,5 +1,7 @@
 package chapter_two.priorityQueue;
 
+import java.util.Iterator;
+
 /**
  * 使用无需数组实现的优先级队列，暂未考虑扩容
  *
@@ -21,6 +23,7 @@ public class ArrayMaxPQ<Key extends Comparable<Key>> implements MaxPQ<Key> {
 
     public ArrayMaxPQ(Key[] k) {
         this.keys = k;
+        this.n = k.length;
     }
 
     @Override
@@ -30,19 +33,17 @@ public class ArrayMaxPQ<Key extends Comparable<Key>> implements MaxPQ<Key> {
 
     @Override
     public Key max() {
-        return keys[getMaxIdx()];
+        int max = getMaxIdx();
+        return keys[max];
     }
 
     @Override
     public Key delMax() {
-        int i = this.n - 1;
-
-        int max = getMaxIdx();
-        MaxPQ.exchange(keys, i, max);
-        keys[i] = null;
-
-        this.n--;
-        return keys[max];
+        int maxIdx = getMaxIdx();
+        Key max = keys[maxIdx];
+        MaxPQ.exchange(keys, --this.n, maxIdx);
+        keys[this.n] = null;
+        return max;
     }
 
     @Override
@@ -60,19 +61,34 @@ public class ArrayMaxPQ<Key extends Comparable<Key>> implements MaxPQ<Key> {
         if (keys == null)
             return "null";
 
-        int iMax = this.n - 1;
+        int iMax = n - 1;
         if (iMax == -1)
             return "[]";
 
         StringBuilder b = new StringBuilder();
         b.append('[');
-        for (int i = 0; i < this.n; i++) {
+        for (int i = 0; i <= n; i++) {
             b.append(keys[i]);
             if (i == iMax)
                 return b.append(']').toString();
             b.append(", ");
         }
         return b.toString();
+    }
+
+    @Override
+    public Iterator<Key> iterator() {
+        return new Iterator<Key>() {
+            @Override
+            public boolean hasNext() {
+                return !isEmpty();
+            }
+
+            @Override
+            public Key next() {
+                return delMax();
+            }
+        };
     }
 
     int getMaxIdx() {

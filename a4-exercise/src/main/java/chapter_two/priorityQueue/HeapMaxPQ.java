@@ -1,12 +1,14 @@
 package chapter_two.priorityQueue;
 
+import java.util.Iterator;
+
 /**
  * 二叉堆实现
  *
  * @author <a href="mailto:likelovec@gmail.com">like</a>
  * @date 2021/8/29 17:03
  */
-public class HeapMaxPQ<Key extends Comparable<Key>> implements MaxPQ<Key> {
+public class HeapMaxPQ<Key extends Comparable<Key>> implements MaxPQ<Key>, Iterable<Key> {
 
     // 基于堆的完全二叉树
     private Key[] keys;
@@ -15,6 +17,13 @@ public class HeapMaxPQ<Key extends Comparable<Key>> implements MaxPQ<Key> {
 
     public HeapMaxPQ(int n) {
         this.keys = ( Key[] ) new Comparable[n + 1];
+    }
+
+    public HeapMaxPQ(Key[] keys) {
+        this.keys = ( Key[] ) new Comparable[keys.length + 1];
+        for (Key key : keys) {
+            insert(key);
+        }
     }
 
     @Override
@@ -46,6 +55,41 @@ public class HeapMaxPQ<Key extends Comparable<Key>> implements MaxPQ<Key> {
     @Override
     public int size() {
         return n;
+    }
+
+    @Override
+    public String toString() {
+        if (keys == null)
+            return "null";
+
+        int iMax = n - 1;
+        if (iMax == -1)
+            return "[]";
+
+        StringBuilder b = new StringBuilder();
+        b.append('[');
+        for (int i = 0; i <= n; i++) {
+            b.append(keys[i]);
+            if (i == iMax)
+                return b.append(']').toString();
+            b.append(", ");
+        }
+        return b.toString();
+    }
+
+    @Override
+    public Iterator<Key> iterator() {
+        return new Iterator<Key>() {
+            @Override
+            public boolean hasNext() {
+                return !isEmpty();
+            }
+
+            @Override
+            public Key next() {
+                return delMax();
+            }
+        };
     }
 
     /**

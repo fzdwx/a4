@@ -6,7 +6,7 @@ package chapter_two.priorityQueue;
  * @author <a href="mailto:likelovec@gmail.com">like</a>
  * @date 2021/8/28 17:47
  */
-public interface MaxPQ<Key extends Comparable<Key>> {
+public interface MaxPQ<Key extends Comparable<Key>> extends Iterable<Key> {
 
     /** exchange a[i] and a[j] */
     static void exchange(Comparable[] a, int i, int j) {
