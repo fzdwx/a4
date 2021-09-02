@@ -49,5 +49,8 @@ public abstract class ST<Key, Value> {
         return size() == 0;
     }
 
-    
+
+    void checkKeyIsNotNull(Key key) {
+        if (key == null) throw new IllegalArgumentException("first argument to put() is null");
+    }
 }

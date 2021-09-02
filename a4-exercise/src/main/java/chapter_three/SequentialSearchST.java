@@ -25,6 +25,7 @@ public class SequentialSearchST<Key, Value> extends ST<Key, Value> {
      */
     @Override
     public Value put(Key key, Value value) {
+        checkKeyIsNotNull(key);
         final Value temp;
 
         for (Node<Key, Value> x = first; x != null; x = x.next) {
@@ -42,6 +43,7 @@ public class SequentialSearchST<Key, Value> extends ST<Key, Value> {
 
     @Override
     public Value get(Key key) {
+        checkKeyIsNotNull(key);
         for (Node<Key, Value> x = first; x != null; x = x.next) {
             if (key.equals(x.key)) return x.val;
         }
@@ -85,6 +87,8 @@ public class SequentialSearchST<Key, Value> extends ST<Key, Value> {
      */
     @Override
     public Value delete(Key key) {
+        checkKeyIsNotNull(key);
+        
         final Value temp;
 
         Node<Key, Value> x = this.first;

@@ -83,13 +83,13 @@ public abstract class OrderlyST<Key extends Comparable<Key>, Value> extends ST<K
     /**
      * [lo..hi]之间的所有键，排序好的
      */
-    public abstract Iterable<Key> Keys(Key lo, Key hi);
+    public abstract Iterable<Key> keys(Key lo, Key hi);
 
     /**
      * 表中的所有键，排序好的
      */
     public Iterable<Key> Keys() {
-        return Keys(min(), max());
+        return keys(min(), max());
     }
 
     /**
