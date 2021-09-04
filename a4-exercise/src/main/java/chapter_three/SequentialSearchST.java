@@ -20,25 +20,19 @@ public class SequentialSearchST<Key, Value> extends ST<Key, Value> {
 
     /**
      * 将键值对存放到表中,如果存在就替换value,不存在就新建一个。
-     *
-     * @return 旧的value
      */
     @Override
-    public Value put(Key key, Value value) {
+    public void put(Key key, Value value) {
         checkKeyIsNotNull(key);
-        final Value temp;
 
         for (Node<Key, Value> x = first; x != null; x = x.next) {
             if (key.equals(x.key)) { // hit
-                temp = x.val;
                 x.val = value; // update
-                return temp;
             }
         }
 
         this.first = Node.of(key, value, first); // new node
         this.size++;
-        return null;
     }
 
     @Override
@@ -86,23 +80,17 @@ public class SequentialSearchST<Key, Value> extends ST<Key, Value> {
      * 删除键对应的值,实现即时删除
      */
     @Override
-    public Value delete(Key key) {
+    public void delete(Key key) {
         checkKeyIsNotNull(key);
-        
-        final Value temp;
 
         Node<Key, Value> x = this.first;
         while (x != null) {
             if (x.next.key.equals(key)) { // hit
-                temp = x.next.val;
                 x.next = x.next.next; // delete
                 this.size--;
-                return temp;
             }
             x = x.next;
         }
-
-        return null;
     }
 
     private static class Node<Key, Value> {
@@ -116,18 +104,18 @@ public class SequentialSearchST<Key, Value> extends ST<Key, Value> {
             this.next = next;
         }
 
+        @Override
+        public String toString() {
+            return "[" + key + " : " + val + "]";
+        }
+
         /**
          * 构造节点
          *
          * @return {@link Node}<{@link Key}, {@link Value}>
          */
-        public static <Key, Value> Node<Key, Value> of(Key key, Value value, Node<Key, Value> next) {
+        static <Key, Value> Node<Key, Value> of(Key key, Value value, Node<Key, Value> next) {
             return new Node<Key, Value>(key, value, next);
-        }
-
-        @Override
-        public String toString() {
-            return "[" + key + " : " + val + "]";
         }
     }
 }

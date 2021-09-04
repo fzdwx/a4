@@ -11,7 +11,7 @@ public abstract class ST<Key, Value> {
     /**
      * 将键值对存放到表中，如果value为空，则删除KEY
      */
-    public abstract Value put(Key key, Value value);
+    public abstract void put(Key key, Value value);
 
     /**
      * 获取键对应的值，如果不存在则返回null
@@ -31,8 +31,8 @@ public abstract class ST<Key, Value> {
     /**
      * 删除键对应的值,默认为延时删除
      */
-    public Value delete(Key key) {
-        return put(key, null);
+    public void delete(Key key) {
+        put(key, null);
     }
 
     /**

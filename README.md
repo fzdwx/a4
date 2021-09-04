@@ -15,3 +15,5 @@ https://algs4.cs.princeton.edu
 6.[排序算法](https://www.wolai.com/ve5WzoyVNBTDb3DYrWSYsw)
 
 7.[优先级队列](https://www.wolai.com/tXLveEZGbpiFsagiVKAsb9)
+
+8.[树](https://www.wolai.com/fjpM6NSWcNSWZrqzF7smTs)

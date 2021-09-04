@@ -23,15 +23,12 @@ public class BinarySearchOrderlyST<Key extends Comparable<Key>, Value> extends O
     }
 
     @Override
-    public Value put(Key key, Value value) {
+    public void put(Key key, Value value) {
         checkKeyIsNotNull(key);
-        final Value temp;
 
         int i = rank(key);
         if (hasKey(key, i)) {  // hit
-            temp = values[i];
             values[i] = value; // update
-            return temp;
         }
 
         if (size == keys.length) resize(2 * keys.length);
@@ -42,7 +39,6 @@ public class BinarySearchOrderlyST<Key extends Comparable<Key>, Value> extends O
         keys[i] = key;
         values[i] = value;
         this.size++;
-        return null;
     }
 
     @Override
@@ -67,16 +63,15 @@ public class BinarySearchOrderlyST<Key extends Comparable<Key>, Value> extends O
     }
 
     @Override
-    public Value delete(Key key) {
+    public void delete(Key key) {
         checkKeyIsNotNull(key);
-        if (isEmpty()) return null;
+        if (isEmpty()) return;
 
         int i = rank(key);
         if (!hasKey(key, i)) {
-            return null;
+            return;
         }
 
-        final Value temp;
         for (int j = i; j < size - 1; j++) {
             keys[j] = keys[j + 1];
             values[j] = values[j + 1];
@@ -85,13 +80,9 @@ public class BinarySearchOrderlyST<Key extends Comparable<Key>, Value> extends O
         size--;
         keys[size] = null;  // to avoid loitering
         values[size] = null;
-        temp = values[size];
 
         // resize if 1/4 full
         if (size > 0 && size == keys.length / 4) resize(keys.length / 2);
-
-
-        return temp;
     }
 
     @Override
@@ -150,14 +141,14 @@ public class BinarySearchOrderlyST<Key extends Comparable<Key>, Value> extends O
         return q;
     }
 
-    public Value deleteMin() {
+    public void deleteMin() {
         if (isEmpty()) throw new NoSuchElementException("Symbol table underflow error");
-        return delete(min());
+        delete(min());
     }
 
-    public Value deleteMax() {
+    public void deleteMax() {
         if (isEmpty()) throw new NoSuchElementException("Symbol table underflow error");
-        return delete(max());
+        delete(max());
     }
 
     // resize the underlying arrays
